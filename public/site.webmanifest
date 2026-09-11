@@ -1,0 +1,13 @@
+{
+  "name": "DexenTech",
+  "short_name": "DexenTech",
+  "description": "AI operational systems for hospitality and B2B commerce.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0b0e",
+  "theme_color": "#0a0b0e",
+  "icons": [
+    { "src": "/images/logo-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/logo-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

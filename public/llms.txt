@@ -1,0 +1,35 @@
+# DexenTech
+
+> DexenTech builds AI operational systems for hospitality and B2B commerce —
+> software that runs bookings, orders, and operations from one place rather
+> than across ten disconnected tools.
+
+## What we build
+
+- **HospitalityOS** — one operating system per property. Bookings, housekeeping,
+  guests, and finance synced across Booking.com, Airbnb, Expedia, and VRBO in a
+  single calendar. Overbookings go to zero.
+- **SupplyFlowOS** — B2B commerce for distributors. Ordering portal, CRM,
+  inventory, and workforce wired together end to end.
+- **AI Intelligence Systems** — MCP integrations, multi-agent workflows,
+  monitoring, and cost control for teams whose systems need to reason.
+
+## Industries served
+
+Independent hotels, hostel groups, short-term rental management, serviced
+apartments, boutique hotels, industrial parts distributors, food and beverage
+wholesale, construction materials suppliers, medical and laboratory suppliers,
+manufacturing components distributors, chemical and industrial wholesalers.
+
+## Key pages
+
+- Solutions: /solutions
+- AI Infrastructure: /ai-infrastructure
+- Services: /services
+- Case Studies: /case-studies
+- Pricing: /pricing
+- Contact: /contact
+
+## Contact
+
+A systems call is a 30-minute audit of where an operation leaks time. No pitch deck.
