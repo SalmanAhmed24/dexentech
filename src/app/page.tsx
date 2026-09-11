@@ -6,9 +6,15 @@ import { WhatWeBuild } from "@/components/sections/WhatWeBuild";
 import { BuiltForOperators } from "@/components/sections/BuiltForOperators";
 import { FeaturedSolutions } from "@/components/sections/FeaturedSolutions";
 import { ProblemsSolved } from "@/components/sections/ProblemsSolved";
+import { AiInfrastructure } from "@/components/sections/AiInfrastructure";
+import { TechStack } from "@/components/sections/TechStack";
+import { FairQuestions, FAIR_QUESTIONS } from "@/components/sections/FairQuestions";
+import { CaseStudies } from "@/components/sections/CaseStudies";
+import { ClosingCta } from "@/components/sections/ClosingCta";
 import { JsonLd } from "@/components/JsonLd";
 import {
   breadcrumbSchema,
+  faqSchema,
   graph,
   productSchemas,
   webPageSchema,
@@ -36,11 +42,11 @@ export default function HomePage() {
       <BuiltForOperators />
       <FeaturedSolutions />
       <ProblemsSolved />
-
-      {/*
-        Still to come — see README "Remaining Home sections":
-        53:2358, 53:3718, 53:2455, 53:3744, 63:5230
-      */}
+      <AiInfrastructure />
+      <TechStack />
+      <FairQuestions />
+      <CaseStudies />
+      <ClosingCta />
 
       <JsonLd
         data={graph(
@@ -52,6 +58,7 @@ export default function HomePage() {
           }),
           breadcrumbSchema([{ name: "Home", path: "/" }]),
           productSchemas(),
+          faqSchema("/", FAIR_QUESTIONS),
         )}
       />
     </>

@@ -33,7 +33,11 @@ domain everywhere at once.
 | Built for operators | `53:2319` | done |
 | Featured solutions | `53:3570` | done |
 | Problems we solve | `53:3656` | done |
-| Sections 8–12 | see below | not started |
+| AI infrastructure | `53:2358` | done |
+| Tech stack | `53:3718` | done |
+| Fair questions | `53:2455` | done — also emits FAQPage schema |
+| Case studies | `53:3744` | done — placeholders, see below |
+| Closing CTA | `63:5230` | done |
 | Footer | `53:4897` | done |
 
 ---
@@ -91,15 +95,21 @@ contradicts the page is worse than no schema at all.
 
 ---
 
-## Remaining Home sections, in build order
+## Known gaps
 
-Five blocks left, with their Figma node IDs and scroll positions:
+**None blocking.** The two items below are content and polish, not bugs.
 
-1. `53:2358` — y 4984, 635px tall
-2. `53:3718` — y 5764, 193px
-3. `53:2455` — y 6106, 338px
-4. `53:3744` — y 6578, 289px
-5. `63:5230` — y 6950, 688px
+**Five icons in the AI infrastructure section are stand-ins.** Nodes `53:2368`,
+`53:2382`, `53:2397`, `53:2408` and `53:2422` could not be exported before the
+Figma MCP quota ran out, so the closest matching icons already in the library
+are used. Four are good matches; "Cost optimization" currently borrows the lock
+glyph and should be swapped once the real export is available.
+
+**Case study cards are placeholders by design.** The Figma file has literal
+`SLOT · CASE STUDY 01` text with bracketed `[Client type]` and `[Metric result]`
+fields. Those are reproduced verbatim with a dashed border rather than filled
+with invented clients. Edit `CASE_STUDIES` in `CaseStudies.tsx` and flip
+`placeholder: false`.
 
 ---
 

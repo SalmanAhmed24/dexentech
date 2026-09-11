@@ -146,3 +146,25 @@ export function graph(...nodes: object[]) {
     "@graph": nodes.flat(),
   };
 }
+
+/**
+ * FAQPage built from the questions actually rendered on the page.
+ *
+ * This is one of the highest-leverage schemas for AI answer engines: it gives
+ * them a clean question→answer pair to quote instead of inferring one from
+ * prose. The caller must pass the same array the section renders.
+ */
+export function faqSchema(
+  path: string,
+  items: readonly { question: string; answer: string }[],
+) {
+  return {
+    "@type": "FAQPage",
+    "@id": abs(`${path}#faq`),
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+}
