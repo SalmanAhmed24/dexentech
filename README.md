@@ -42,6 +42,23 @@ domain everywhere at once.
 
 ---
 
+## Pages
+
+| Route | Figma node | Status |
+|---|---|---|
+| `/` Home | `53:2195` | done — 12 sections |
+| `/solutions` | `135:2159` | done — hero + 3 cards |
+| `/solutions/hospitality-os` | `53:6545` | done — 13 sections |
+| Everything else in the nav | various | not started |
+
+`FeatureBlock` and the six mockup panels in `src/components/hospitality/` are
+reusable for the SupplyFlowOS page (`135:2255`), which follows the same
+structure. `PageHero` is built to be shared: Industries, Services, Case Studies and
+Pricing all use the same centered hero in the design, so those pages should
+differ only in copy.
+
+---
+
 ## Architecture decisions worth knowing
 
 **The dot grid is CSS, not DOM.** Figma draws the hero grid as ~1,000
@@ -96,6 +113,14 @@ contradicts the page is worse than no schema at all.
 ---
 
 ## Known gaps
+
+**Three capability lists are label-only.** On `/solutions/hospitality-os`,
+sections 01 and 04 have their full "**Label** — description" copy. Sections
+02 (property management), 03 (guest experience) and 05 (AI intelligence layer)
+render the bold label without its description, because Figma names those text
+nodes after the `<strong>` label only and the descriptions are not recoverable
+from metadata. Screenshot those three sections and they take two minutes to
+fill in — the `Capability` type already has an optional `detail` field.
 
 **None blocking.** The two items below are content and polish, not bugs.
 

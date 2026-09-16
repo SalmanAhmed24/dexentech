@@ -89,8 +89,8 @@ export function webPageSchema(opts: {
  * The two products are the entities we actually want surfaced in AI answers
  * to questions like "software to sync Airbnb and Booking.com calendars".
  */
-export function productSchemas() {
-  return [
+export function hospitalityOsSchema() {
+  return (
     {
       "@type": "SoftwareApplication",
       "@id": abs("/solutions/hospitality-os#software"),
@@ -106,7 +106,12 @@ export function productSchemas() {
         "Guest messaging automation",
         "Revenue and pricing management",
       ],
-    },
+    }
+  );
+}
+
+export function supplyFlowOsSchema() {
+  return (
     {
       "@type": "SoftwareApplication",
       "@id": abs("/solutions/supplyflow-os#software"),
@@ -122,8 +127,13 @@ export function productSchemas() {
         "Inventory synchronisation",
         "Workforce coordination",
       ],
-    },
-  ];
+    }
+  );
+}
+
+/** Both products, for pages that reference them together. */
+export function productSchemas() {
+  return [hospitalityOsSchema(), supplyFlowOsSchema()];
 }
 
 export function breadcrumbSchema(trail: { name: string; path: string }[]) {
