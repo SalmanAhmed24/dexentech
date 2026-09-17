@@ -168,6 +168,24 @@ export function faqSchema(
   path: string,
   items: readonly { question: string; answer: string }[],
 ) {
+  /*
+    Guard with a message that names the actual cause.
+
+    If `items` arrives as anything other than an array, it is almost always
+    because the constant is exported from a module carrying "use client". A
+    server component importing from such a module receives a client-reference
+    proxy rather than the value, and the failure surfaces here as the very
+    unhelpful "items.map is not a function". Keep FAQ data in server modules.
+  */
+  if (!Array.isArray(items)) {
+    throw new TypeError(
+      `faqSchema(${path}): expected an array of questions but received ` +
+        `${typeof items}. If this data is exported from a "use client" module, ` +
+        `move it into a server module — client exports reach the server as ` +
+        `references, not values.`,
+    );
+  }
+
   return {
     "@type": "FAQPage",
     "@id": abs(`${path}#faq`),

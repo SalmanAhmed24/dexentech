@@ -4,13 +4,14 @@ import { FeatureBlock } from "@/components/hospitality/FeatureBlock";
 import {
   CoreModules,
   HOSPITALITY_FAQ,
+  HOSPITALITY_PLUGS,
   HospitalityCta,
   HospitalityFaq,
   OperatorStrip,
-  PlugsInto,
-  PricingBand,
   WhatStops,
 } from "@/components/hospitality/sections";
+import { CtaBand } from "@/components/ui/CtaBand";
+import { PillGroup } from "@/components/ui/PillGroup";
 import {
   AgentsMock,
   ChannelSyncMock,
@@ -172,8 +173,17 @@ export default function HospitalityOsPage() {
         mockup={<AgentsMock />}
       />
 
-      <PlugsInto />
-      <PricingBand />
+      <PillGroup
+        id="hospitality-plugs"
+        heading="Plugs into what you already use"
+        items={HOSPITALITY_PLUGS}
+      />
+      <CtaBand
+        id="hospitality-pricing"
+        heading="Priced to your property count"
+        subheading="Tell us your rooms and units. Get a number this week."
+        cta={{ label: "Get a Quote", href: "/pricing" }}
+      />
       <HospitalityFaq />
       <HospitalityCta />
 

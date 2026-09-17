@@ -17,7 +17,7 @@ const COLUMNS = [
   {
     heading: "Infrastructure",
     links: [
-      { label: "Overview", href: "/ai-infrastructure" },
+      { label: "Overview", href: "/solutions/ai-intelligence-systems" },
       { label: "MCP Integrations", href: "/ai-infrastructure/mcp-integrations" },
       {
         label: "Multi-Agent Systems",

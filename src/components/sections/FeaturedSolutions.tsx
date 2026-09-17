@@ -14,7 +14,7 @@ type Solution = {
   url: string;
   /** Figma alternates which side the mockup sits on. */
   mediaFirst: boolean;
-  image?: { src: string; alt: string };
+  image?: { src: string; alt: string; width: number; height: number };
 };
 
 const SOLUTIONS: Solution[] = [
@@ -27,8 +27,10 @@ const SOLUTIONS: Solution[] = [
     url: "app.dexentech.com/hospitality",
     mediaFirst: false,
     image: {
-      src: "/images/mockup-hospitality.png",
-      alt: "HospitalityOS dashboard showing active tasks, guest reviews, and a revenue forecast chart.",
+      src: "/images/solution-1.webp",
+      alt: "The HospitalityOS dashboard: total portfolio value, a performance trend chart, and live property metrics.",
+      width: 527,
+      height: 300,
     },
   },
   {
@@ -40,15 +42,17 @@ const SOLUTIONS: Solution[] = [
     url: "app.dexentech.com/supply",
     mediaFirst: true,
     image: {
-      src: "/images/mockup-supplyflow.png",
-      alt: "SupplyFlowOS ordering portal showing total order value and a trend chart.",
+      src: "/images/solution-2.webp",
+      alt: "The SupplyFlowOS workspace: active task count, client reviews, and a revenue forecast chart.",
+      width: 527,
+      height: 320,
     },
   },
   {
     name: "AI Infrastructure Services",
     body: "For teams that already have systems and want them to think. MCP integrations, multi-agent workflows, monitoring, model routing, and cost control.",
     metric: "Reply time reduction, measured per agent",
-    href: "/ai-infrastructure",
+    href: "/solutions/ai-intelligence-systems",
     cta: "Explore AI Infrastructure",
     url: "app.dexentech.com/agents",
     mediaFirst: false,
@@ -109,25 +113,21 @@ export function FeaturedSolutions() {
               <div className={cn(solution.mediaFirst && "lg:order-1")}>
                 <BrowserFrame url={solution.url}>
                   {solution.image ? (
-                    <>
+                    /*
+                      The artwork already carries its own violet bloom, so the
+                      CSS gradient that previously stood in for it is gone —
+                      layering both would double the glow.
+                    */
+                    (
                       <Image
                         src={solution.image.src}
                         alt={solution.image.alt}
-                        width={1052}
-                        height={640}
+                        width={solution.image.width}
+                        height={solution.image.height}
                         sizes="(max-width: 1024px) 92vw, 42vw"
                         className="h-auto w-full"
                       />
-                      {/*
-                        Figma layers a separate PNG over each screenshot purely
-                        for the violet bloom. Painted here instead — one less
-                        network request and one less thing to keep in sync.
-                      */}
-                      <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(168_85_247/0.22),transparent_38%)]"
-                      />
-                    </>
+                    )
                   ) : (
                     <AgentLog />
                   )}

@@ -60,7 +60,7 @@ export function FeatureBlock({
 
   return (
     <section aria-labelledby={headingId} className="shell py-14 md:py-20">
-      <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16 xl:gap-[64px]">
         {/*
           Copy stays first in source order regardless of which side the mockup
           sits on, so the heading is read before its illustration on mobile and
@@ -74,28 +74,28 @@ export function FeatureBlock({
 
             <h2
               id={headingId}
-              className="mt-4 max-w-[620px] font-sans text-[clamp(1.75rem,3.4vw,2.5rem)] font-bold leading-[1.15] tracking-[-0.025em] text-pretty text-ink-100"
+              className="mt-4 max-w-[628px] font-sans text-[clamp(1.75rem,3.4vw,2.375rem)] font-bold leading-[1.16] tracking-[-0.02em] text-pretty text-ink-100"
             >
               {title}
             </h2>
 
-            <p className="mt-5 max-w-[560px] text-[16px] leading-[26px] text-pretty text-ink-300">
+            <p className="mt-[18px] max-w-[628px] text-[17px] leading-[27.2px] text-pretty text-ink-300">
               {lead}
             </p>
           </Reveal>
 
-          <ul className="mt-8">
+          <ul className="mt-7">
             {capabilities.map((capability, i) => (
               <Reveal
                 as="li"
                 key={capability.label}
                 delay={i * 0.05}
                 y={10}
-                className="border-b border-[rgb(255_255_255/0.08)] last:border-b-0"
+                className="border-b border-[rgb(255_255_255/0.06)]"
               >
-                <div className="flex items-start gap-[14px] py-[15px]">
+                <div className="flex items-start gap-[14px] py-[12px]">
                   <CheckMark />
-                  <p className="text-[15px] leading-[24px] text-pretty text-ink-300">
+                  <p className="text-[15px] leading-[24px] text-pretty text-ink-200">
                     <strong className="font-semibold text-ink-100">
                       {capability.label}
                     </strong>

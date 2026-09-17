@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 /**
  * Icons exported verbatim from the Figma Home frame.
  *
@@ -18,7 +19,7 @@ const strokeProps = {
 
 const thinStroke = { ...strokeProps, strokeWidth: 1.275 };
 
-function Svg20({ className, children }: IconProps & { children: React.ReactNode }) {
+function Svg20({ className, children }: IconProps & { children: ReactNode }) {
   return (
     <svg
       width="20"
@@ -35,7 +36,7 @@ function Svg20({ className, children }: IconProps & { children: React.ReactNode 
   );
 }
 
-function Svg18({ className, children }: IconProps & { children: React.ReactNode }) {
+function Svg18({ className, children }: IconProps & { children: ReactNode }) {
   return (
     <svg
       width="18"
@@ -195,7 +196,7 @@ const audienceStroke = {
   stroke: "currentColor",
 };
 
-function Svg17({ className, children }: IconProps & { children: React.ReactNode }) {
+function Svg17({ className, children }: IconProps & { children: ReactNode }) {
   return (
     <svg
       width="17"

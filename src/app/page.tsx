@@ -54,7 +54,7 @@ export default function HomePage() {
             path: "/",
             name: "AI Operational Systems for Hospitality and B2B Commerce",
             description: site.description,
-            primaryImage: "/images/hero-figure.png",
+            primaryImage: "/images/hero-figure.webp",
           }),
           breadcrumbSchema([{ name: "Home", path: "/" }]),
           productSchemas(),

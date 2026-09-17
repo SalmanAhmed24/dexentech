@@ -72,9 +72,10 @@ export const primaryNav: NavItem[] = [
   },
   {
     label: "AI Infrastructure",
-    href: "/ai-infrastructure",
+    href: "/solutions/ai-intelligence-systems",
     children: [
-      { label: "Overview", href: "/ai-infrastructure" },
+      // The overview lives under Solutions; the deeper pages keep their own paths.
+      { label: "Overview", href: "/solutions/ai-intelligence-systems" },
       { label: "MCP Integrations", href: "/ai-infrastructure/mcp-integrations" },
       {
         label: "Multi-Agent Workflows",

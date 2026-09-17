@@ -49,7 +49,14 @@ domain everywhere at once.
 | `/` Home | `53:2195` | done — 12 sections |
 | `/solutions` | `135:2159` | done — hero + 3 cards |
 | `/solutions/hospitality-os` | `53:6545` | done — 13 sections |
+| `/solutions/supplyflow-os` | `135:2255` | done — 13 sections, copy gaps below |
+| `/solutions/ai-intelligence-systems` | `135:364` | done — built from a full-page screenshot |
 | Everything else in the nav | various | not started |
+
+Shared building blocks live in `src/components/ui/`: `PageHero`, `CtaBand`,
+`PillGroup`, `CheckList`, `ArchitectureStack`, `BrowserFrame`, `Button` and
+`Reveal`. Each has exactly one implementation — the pill rows, quote bands and
+architecture diagram were deduplicated across four pages.
 
 `FeatureBlock` and the six mockup panels in `src/components/hospitality/` are
 reusable for the SupplyFlowOS page (`135:2255`), which follows the same
@@ -60,6 +67,14 @@ differ only in copy.
 ---
 
 ## Architecture decisions worth knowing
+
+**Keep page data in server modules.** Constants read by a route — FAQ arrays,
+pill lists — must not be exported from a file carrying `"use client"`. Next
+replaces a client module's exports with client references when a server
+component imports them, so the route receives a proxy instead of the array and
+fails at runtime with something unhelpful like `items.map is not a function`.
+Heroes and anything else holding hooks live in their own `*Hero.tsx` files for
+this reason; `faqSchema` throws a guard message naming the cause.
 
 **The dot grid is CSS, not DOM.** Figma draws the hero grid as ~1,000
 individual `<ellipse>` nodes. Shipping that would cost real layout time and
@@ -112,15 +127,36 @@ contradicts the page is worse than no schema at all.
 
 ---
 
+## Routing note
+
+The Figma frame is titled "AI Infrastructure Services", but the page ships at
+`/solutions/ai-intelligence-systems` to match the third Solutions card. The
+`AI Infrastructure` nav group's "Overview" entry now points there too, while
+its deeper pages keep their own `/ai-infrastructure/*` paths — those are
+separate Figma frames (`135:1743` MCP Integrations, `135:724` Monitoring) and
+aren't built yet. If you'd rather the whole group moved under Solutions, it's a
+single edit in `src/lib/site.ts`.
+
+---
+
 ## Known gaps
 
-**Three capability lists are label-only.** On `/solutions/hospitality-os`,
-sections 01 and 04 have their full "**Label** — description" copy. Sections
-02 (property management), 03 (guest experience) and 05 (AI intelligence layer)
-render the bold label without its description, because Figma names those text
-nodes after the `<strong>` label only and the descriptions are not recoverable
-from metadata. Screenshot those three sections and they take two minutes to
-fill in — the `Capability` type already has an optional `detail` field.
+**SupplyFlowOS copy is partly missing.** Figma's metadata truncates text at
+~50 characters and the MCP quota ran out mid-page. Section 01 has its full
+copy; sections 02–05 render bold labels with no description, and the six FAQ
+answers are cut short. Each FAQ entry carries a `complete: false` flag and is
+filtered out of the FAQPage structured data, so nothing half-written is
+published as schema — fix the copy, flip the flag, and the schema turns itself
+on. Capability `detail` is optional, so those are one-line edits.
+
+**HospitalityOS sections 02, 03 and 05** are missing their capability
+descriptions for the same reason.
+
+**Four icons on `/solutions/ai-intelligence-systems` are authored, not exported.** Figma nodes
+`135:438`, `135:459`, `135:481` and `135:499` (sparkle, pyramid, eye, person)
+plus the checkmark at `135:593` were drawn by hand to match the design, because
+the MCP quota was exhausted. They use the same 20px box and 1.41667 stroke as
+the exported set. Swap them when quota allows.
 
 **None blocking.** The two items below are content and polish, not bugs.
 

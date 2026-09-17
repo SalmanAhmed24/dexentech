@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { ElementType, ReactNode } from "react";
 import { EASE, usePrefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -32,7 +32,14 @@ export function Reveal({
   as?: keyof typeof MOTION_TAGS;
 }) {
   const reduced = usePrefersReducedMotion();
-  const Component = MOTION_TAGS[as];
+  /*
+    MOTION_TAGS[as] is a union of motion.div | motion.li | motion.section.
+    Their prop types differ (HTMLDivElement vs HTMLLIElement vs …), so JSX
+    cannot resolve a common call signature and every <Reveal as="li"> fails to
+    type-check. Widening to ElementType keeps the runtime behaviour identical
+    and lets the shared motion props through.
+  */
+  const Component = MOTION_TAGS[as] as ElementType;
 
   return (
     <Component

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import type { PointerEvent } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useGSAP } from "@gsap/react";
@@ -55,7 +56,7 @@ export function Hero() {
   const translateX = useTransform(springX, [-0.5, 0.5], [14, -14]);
   const translateY = useTransform(springY, [-0.5, 0.5], [12, -12]);
 
-  const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
+  const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
     if (reduced) return;
     const bounds = event.currentTarget.getBoundingClientRect();
     pointerX.set((event.clientX - bounds.left) / bounds.width - 0.5);
@@ -225,10 +226,10 @@ export function Hero() {
               className="relative size-full"
             >
               <Image
-                src="/images/hero-figure.png"
+                src="/images/hero-figure.webp"
                 alt="A cybernetic figure in a hooded jacket, representing DexenTech's AI operational systems running live behind hospitality and B2B commerce businesses."
-                width={1382}
-                height={1382}
+                width={2048}
+                height={2048}
                 priority
                 fetchPriority="high"
                 sizes="(max-width: 1024px) 90vw, 45vw"
