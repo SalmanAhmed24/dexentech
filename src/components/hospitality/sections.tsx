@@ -1,37 +1,14 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 import { Eyebrow, Reveal, SectionHeading } from "@/components/ui/Reveal";
 
-/* ---------- Built for operators like you (53:6547) ---------- */
+/* ---------- Strip data (53:6547) ---------- */
 
-const OPERATORS = [
+export const HOSPITALITY_OPERATORS = [
   "Independent hotels · 10–200 rooms",
   "Hostel groups · 1–5 properties",
   "Short-term rental managers · 5–100 units",
   "Serviced apartment operators",
 ];
-
-export function OperatorStrip() {
-  return (
-    <section
-      aria-label="Who HospitalityOS is built for"
-      className="border-y border-line-subtle py-[22px]"
-    >
-      <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-4 px-5 md:flex-row md:items-center md:gap-10 md:px-10">
-        <p className="shrink-0 font-mono text-[11px] uppercase tracking-[1.1px] text-ink-600">
-          Built for operators like you
-        </p>
-        <ul className="flex flex-wrap gap-x-7 gap-y-2">
-          {OPERATORS.map((operator) => (
-            <li key={operator} className="text-[13.5px] text-ink-400">
-              {operator}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
 
 /* ---------- What stops the moment you switch (53:7686) ---------- */
 
@@ -209,47 +186,6 @@ export function HospitalityFaq() {
             </details>
           </Reveal>
         ))}
-      </div>
-    </section>
-  );
-}
-
-/* ---------- See it running on your properties (53:8243) ---------- */
-
-export function HospitalityCta() {
-  return (
-    <section
-      aria-labelledby="hospitality-cta"
-      className="relative isolate overflow-hidden border-t border-line-subtle py-20 md:py-28"
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[min(1000px,96vw)] -translate-x-1/2 -translate-y-1/3 rounded-full bg-[radial-gradient(ellipse_at_center,rgb(168_85_247/0.2),rgb(109_40_217/0.08)_45%,transparent_72%)] blur-[70px]"
-      />
-
-      <div className="shell flex flex-col items-center text-center">
-        <Reveal>
-          <h2
-            id="hospitality-cta"
-            className="max-w-[720px] font-sans text-[clamp(1.875rem,4.2vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.025em] text-pretty text-ink-100"
-          >
-            See it running on your properties
-          </h2>
-        </Reveal>
-
-        <Reveal delay={0.08}>
-          <p className="mt-5 max-w-[520px] text-[clamp(1rem,1.5vw,1.125rem)] leading-[1.6] text-pretty text-ink-300">
-            30 minutes. Your property count, your channels, a live walkthrough.
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.14}>
-          <div className="mt-8">
-            <Button href="/contact" className="px-[28px]">
-              Book a Strategy Call
-            </Button>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

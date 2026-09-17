@@ -4,12 +4,13 @@ import { FeatureBlock } from "@/components/hospitality/FeatureBlock";
 import {
   CoreModules,
   HOSPITALITY_FAQ,
+  HOSPITALITY_OPERATORS,
   HOSPITALITY_PLUGS,
-  HospitalityCta,
   HospitalityFaq,
-  OperatorStrip,
   WhatStops,
 } from "@/components/hospitality/sections";
+import { LabelledStrip } from "@/components/ui/LabelledStrip";
+import { PageCta } from "@/components/ui/PageCta";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { PillGroup } from "@/components/ui/PillGroup";
 import {
@@ -58,7 +59,11 @@ export default function HospitalityOsPage() {
   return (
     <>
       <HospitalityHero />
-      <OperatorStrip />
+      <LabelledStrip
+        ariaLabel="Who HospitalityOS is built for"
+        label="Built for operators like you"
+        items={HOSPITALITY_OPERATORS}
+      />
       <WhatStops />
       <CoreModules />
 
@@ -185,7 +190,12 @@ export default function HospitalityOsPage() {
         cta={{ label: "Get a Quote", href: "/pricing" }}
       />
       <HospitalityFaq />
-      <HospitalityCta />
+      <PageCta
+        id="hospitality-cta"
+        heading="See it running on your properties"
+        subheading="30 minutes. Your property count, your channels, a live walkthrough."
+        cta={{ label: "Book a Strategy Call", href: "/contact" }}
+      />
 
       <JsonLd
         data={graph(

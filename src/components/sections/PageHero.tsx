@@ -3,12 +3,17 @@
 import { useRef, type ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 import { gsap, GSAP_EASE, usePrefersReducedMotion } from "@/lib/motion";
 
 /**
- * The centered hero used by every interior page — Solutions, Industries,
- * Services, and the rest. Built once here so those pages differ only in copy,
- * and so a change to the treatment lands everywhere at the same time.
+ * The hero shared by every interior page, in three shapes:
+ *   - centred (default) — Solutions, Industries, Services
+ *   - align="left"      — MCP Integrations, Multi-Agent Workflows
+ *   - with a `panel`    — Monitoring, where a live console sits alongside
+ *
+ * Passing a panel forces the left-aligned two-column layout, since a centred
+ * column beside a panel reads as neither.
  *
  * Figma pins the section to 573.53px. That height is a floor rather than a
  * fixed value, because the headline wraps to three lines on narrow viewports
@@ -19,12 +24,19 @@ export function PageHero({
   title,
   subtitle,
   cta,
+  align = "center",
+  panel,
 }: {
   eyebrow: string;
   title: ReactNode;
   subtitle: string;
   cta?: { label: string; href: string };
+  /** The MCP page runs its hero left-aligned with a wider body paragraph. */
+  align?: "center" | "left";
+  /** Optional console or mockup shown beside the copy. */
+  panel?: ReactNode;
 }) {
+  const centered = align === "center" && !panel;
   const root = useRef<HTMLElement>(null);
   const reduced = usePrefersReducedMotion();
 
@@ -40,7 +52,9 @@ export function PageHero({
         // The headline wipes up from behind its own mask, matching the home hero.
         .from("[data-hero='title']", { yPercent: 108, opacity: 0, duration: 0.95 }, 0.2)
         .from("[data-hero='sub']", { opacity: 0, y: 16 }, 0.5)
-        .from("[data-hero='cta']", { opacity: 0, y: 14, duration: 0.6 }, 0.62);
+        .from("[data-hero='cta']", { opacity: 0, y: 14, duration: 0.6 }, 0.62)
+        // No-op when the page passes no panel — GSAP ignores an empty target.
+        .from("[data-hero='panel']", { opacity: 0, y: 26, duration: 1.1 }, 0.3);
     },
     { scope: root, dependencies: [reduced] },
   );
@@ -65,7 +79,16 @@ export function PageHero({
         className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[320px] w-[min(900px,96vw)] -translate-x-1/2 -translate-y-[180px] rounded-full bg-[radial-gradient(ellipse_at_center,rgb(109_40_217/0.42),transparent_70%)] blur-[70px]"
       />
 
-      <div className="shell flex flex-col items-center text-center">
+      <div
+        className={cn(
+          "shell",
+          panel
+            ? "grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14"
+            : "flex flex-col",
+          !panel && (centered ? "items-center text-center" : "items-start text-left"),
+        )}
+      >
+        <div className={cn("flex flex-col", centered ? "items-center text-center" : "items-start text-left")}>
         <p
           data-hero="eyebrow"
           className="font-mono text-[12px] uppercase tracking-[1.44px] text-violet-soft"
@@ -75,7 +98,13 @@ export function PageHero({
 
         <h1
           id="page-hero-heading"
-          className="mt-[26px] max-w-[800px] overflow-hidden pb-[0.08em] font-sans text-[clamp(2.5rem,6.2vw,4.5rem)] font-bold leading-[1.04] tracking-[-0.03em] text-pretty text-ink-100"
+          className={cn(
+            "mt-[26px] overflow-hidden pb-[0.08em] font-sans font-bold",
+            "leading-[1.04] tracking-[-0.03em] text-pretty text-ink-100",
+            centered
+              ? "max-w-[800px] text-[clamp(2.5rem,6.2vw,4.5rem)]"
+              : "max-w-[900px] text-[clamp(2.25rem,5vw,3.25rem)]",
+          )}
         >
           <span data-hero="title" className="block">
             {title}
@@ -84,7 +113,7 @@ export function PageHero({
 
         <p
           data-hero="sub"
-          className="mt-[26px] max-w-[520px] text-[clamp(1rem,1.5vw,1.1875rem)] leading-[1.6] text-pretty text-ink-200"
+          className={cn("mt-[26px] text-[clamp(1rem,1.5vw,1.1875rem)] leading-[1.6] text-pretty text-ink-200", centered ? "max-w-[520px]" : "max-w-[640px]")}
         >
           {subtitle}
         </p>
@@ -96,6 +125,9 @@ export function PageHero({
             </Button>
           </div>
         )}
+        </div>
+
+        {panel && <div data-hero="panel">{panel}</div>}
       </div>
     </section>
   );

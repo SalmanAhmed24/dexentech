@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { FeatureBlock } from "@/components/hospitality/FeatureBlock";
 import { SupplyHero } from "@/components/supplyflow/SupplyHero";
 import {
-  DistributorStrip,
+  SUPPLY_DISTRIBUTORS,
   SUPPLY_PLUGS,
-  SupplyCta,
   SupplyModules,
   WhatStopsSupply,
 } from "@/components/supplyflow/sections";
+import { LabelledStrip } from "@/components/ui/LabelledStrip";
+import { PageCta } from "@/components/ui/PageCta";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { PillGroup } from "@/components/ui/PillGroup";
 import { SupplyFaq, supplyFaqForSchema } from "@/components/supplyflow/SupplyFaq";
@@ -52,7 +53,11 @@ export default function SupplyFlowOsPage() {
   return (
     <>
       <SupplyHero />
-      <DistributorStrip />
+      <LabelledStrip
+        ariaLabel="Who SupplyFlowOS is built for"
+        label="Built for distributors like you"
+        items={SUPPLY_DISTRIBUTORS}
+      />
       <WhatStopsSupply />
       <SupplyModules />
 
@@ -173,7 +178,12 @@ export default function SupplyFlowOsPage() {
         cta={{ label: "Get a Quote", href: "/pricing" }}
       />
       <SupplyFaq />
-      <SupplyCta />
+      <PageCta
+        id="supply-cta"
+        heading="See it running on your catalog"
+        subheading="30 minutes. Your SKUs, your pricing tiers, a live walkthrough."
+        cta={{ label: "Book a Strategy Call", href: "/contact" }}
+      />
 
       <JsonLd
         data={graph(

@@ -5,12 +5,11 @@
   SupplyHero.tsx.
 */
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 import { Eyebrow, Reveal, SectionHeading } from "@/components/ui/Reveal";
 
-/* ---------- Built for distributors like you (135:2343) ---------- */
+/* ---------- Strip data (135:2343) ---------- */
 
-const DISTRIBUTORS = [
+export const SUPPLY_DISTRIBUTORS = [
   "Industrial parts distributors",
   "Wholesale food & beverage",
   "Construction materials",
@@ -18,28 +17,6 @@ const DISTRIBUTORS = [
   "Manufacturing components",
   "Chemical & industrial wholesalers",
 ];
-
-export function DistributorStrip() {
-  return (
-    <section
-      aria-label="Who SupplyFlowOS is built for"
-      className="border-y border-line-subtle py-[22px]"
-    >
-      <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-4 px-5 md:flex-row md:items-center md:gap-10 md:px-10">
-        <p className="shrink-0 font-mono text-[11px] uppercase tracking-[1.1px] text-ink-600">
-          Built for distributors like you
-        </p>
-        <ul className="flex flex-wrap gap-x-7 gap-y-2">
-          {DISTRIBUTORS.map((item) => (
-            <li key={item} className="text-[13.5px] text-ink-400">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
 
 /* ---------- What stops the day you switch (135:2474) ---------- */
 
@@ -148,42 +125,3 @@ export const SUPPLY_PLUGS = [
   "ERPNext",
   "Odoo",
 ];
-
-/* ---------- See it running on your catalog (135:3111) ---------- */
-
-export function SupplyCta() {
-  return (
-    <section
-      aria-labelledby="supply-cta"
-      className="relative isolate overflow-hidden border-t border-line-subtle py-20 md:py-28"
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[min(1000px,96vw)] -translate-x-1/2 -translate-y-1/3 rounded-full bg-[radial-gradient(ellipse_at_center,rgb(168_85_247/0.2),rgb(109_40_217/0.08)_45%,transparent_72%)] blur-[70px]"
-      />
-      <div className="shell flex flex-col items-center text-center">
-        <Reveal>
-          <h2
-            id="supply-cta"
-            className="max-w-[720px] font-sans text-[clamp(1.875rem,4.2vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.025em] text-pretty text-ink-100"
-          >
-            See it running on your catalog
-          </h2>
-        </Reveal>
-        <Reveal delay={0.08}>
-          {/* TODO(copy): Figma truncates this line. */}
-          <p className="mt-5 max-w-[520px] text-[clamp(1rem,1.5vw,1.125rem)] leading-[1.6] text-pretty text-ink-300">
-            30 minutes. Your SKUs, your pricing tiers, a live walkthrough.
-          </p>
-        </Reveal>
-        <Reveal delay={0.14}>
-          <div className="mt-8">
-            <Button href="/contact" className="px-[28px]">
-              Book a Strategy Call
-            </Button>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}

@@ -51,11 +51,18 @@ domain everywhere at once.
 | `/solutions/hospitality-os` | `53:6545` | done — 13 sections |
 | `/solutions/supplyflow-os` | `135:2255` | done — 13 sections, copy gaps below |
 | `/solutions/ai-intelligence-systems` | `135:364` | done — built from a full-page screenshot |
+| `/ai-infrastructure/mcp-integrations` | `135:1743` | done — built from the PDF export |
+| `/ai-infrastructure/multi-agent-workflows` | `135:1951` | done — built from the PDF export |
+| `/ai-infrastructure/monitoring-cost-optimization` | `135:724` | done — built from the PDF export |
 | Everything else in the nav | various | not started |
 
-Shared building blocks live in `src/components/ui/`: `PageHero`, `CtaBand`,
-`PillGroup`, `CheckList`, `ArchitectureStack`, `BrowserFrame`, `Button` and
-`Reveal`. Each has exactly one implementation — the pill rows, quote bands and
+Shared building blocks live in `src/components/ui/`: `CtaBand` (mid-page quote
+card), `PageCta` (full-bleed closing CTA), `PillGroup`, `LabelledStrip`,
+`CheckList`, `ArchitectureStack`, `BrowserFrame`, `Button` and `Reveal`, plus
+`PageHero` in `components/sections/`, which covers three shapes: centred,
+`align="left"`, and `panel={...}` for a hero with a console beside the copy.
+`PillarCards` renders the three-up supporting row used to close the
+AI Infrastructure pages. Each has exactly one implementation — the pill rows, quote bands and
 architecture diagram were deduplicated across four pages.
 
 `FeatureBlock` and the six mockup panels in `src/components/hospitality/` are
@@ -167,7 +174,13 @@ on. Capability `detail` is optional, so those are one-line edits.
 **HospitalityOS sections 02, 03 and 05** are missing their capability
 descriptions for the same reason.
 
-**Four icons on `/solutions/ai-intelligence-systems` are authored, not exported.** Figma nodes
+**Authored icons.** Four on `/solutions/ai-intelligence-systems` and four on
+`/ai-infrastructure/mcp-integrations` (nodes `135:1810`, `135:1844`,
+`135:1859`, `135:1874`) were drawn by hand rather than exported, because the
+Figma MCP quota was exhausted each time. The MCP page's other two cards reuse
+`IconShareNodes` and `IconBarChart`, which are genuine exports from this file.
+Original note follows — four icons on `/solutions/ai-intelligence-systems` are
+authored, not exported.** Figma nodes
 `135:438`, `135:459`, `135:481` and `135:499` (sparkle, pyramid, eye, person)
 plus the checkmark at `135:593` were drawn by hand to match the design, because
 the MCP quota was exhausted. They use the same 20px box and 1.41667 stroke as
