@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { cn } from "@/lib/utils";
@@ -11,7 +12,14 @@ import { cn } from "@/lib/utils";
  * between the server and client render and trip a hydration mismatch.
  */
 
-function PanelHeading({ left, right }: { left: string; right?: string }) {
+function PanelHeading({
+  left,
+  right,
+}: {
+  left: string;
+  /* Rendered raw, so callers can pass <LiveDot /> as well as plain text. */
+  right?: ReactNode;
+}) {
   return (
     <div className="flex items-center justify-between px-[21px] pb-3 pt-4">
       <span className="font-mono text-[10.5px] uppercase tracking-[1px] text-ink-500">

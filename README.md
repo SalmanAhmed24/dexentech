@@ -139,6 +139,21 @@ single edit in `src/lib/site.ts`.
 
 ---
 
+## Build gotchas already hit
+
+Three that only surface at `next build`, all fixed — worth knowing if you add
+components:
+
+- **Props typed `string` that receive JSX.** `PanelHeading`'s `right` took a
+  `<LiveDot />`; it needs `ReactNode`.
+- **`as const` on values Framer Motion consumes.** `EASE` must be a mutable
+  `[number, number, number, number]` — Framer's bezier type is mutable, and
+  TypeScript refuses readonly-to-mutable tuple assignment.
+- **`React.` namespace without importing React.** React 19's types dropped the
+  global UMD namespace, so `React.ReactNode` fails in a module.
+
+---
+
 ## Known gaps
 
 **SupplyFlowOS copy is partly missing.** Figma's metadata truncates text at

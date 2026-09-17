@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Variants } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -21,8 +20,13 @@ export { gsap, ScrollTrigger };
  * The single easing curve the whole site shares. One curve is what makes
  * scattered animations read as one designed system rather than a pile of
  * separate effects.
+ *
+ * Typed as a mutable tuple on purpose: `as const` yields a readonly tuple, and
+ * Framer Motion's bezier type is `[number, number, number, number]`.
+ * TypeScript refuses readonly-to-mutable tuple assignment, so every
+ * `transition={{ ease: EASE }}` would fail to compile.
  */
-export const EASE = [0.16, 1, 0.3, 1] as const;
+export const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 export const GSAP_EASE = "expo.out";
 
 /**
@@ -44,44 +48,3 @@ export function usePrefersReducedMotion(): boolean {
 
   return reduced;
 }
-
-/** Parent that staggers its children. Pass `reduced` to collapse it to nothing. */
-export const stagger = (reduced: boolean, gap = 0.08): Variants => ({
-  hidden: {},
-  visible: {
-    transition: reduced ? {} : { staggerChildren: gap, delayChildren: 0.05 },
-  },
-});
-
-/** The workhorse child variant: rise and fade. */
-export const riseIn = (reduced: boolean, distance = 18): Variants => ({
-  hidden: reduced ? { opacity: 1, y: 0 } : { opacity: 0, y: distance },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: reduced ? { duration: 0 } : { duration: 0.7, ease: EASE },
-  },
-});
-
-/**
- * A headline line wiped upward from behind its own mask. The parent element
- * needs `overflow: hidden` for this to read correctly.
- */
-export const lineWipe = (reduced: boolean): Variants => ({
-  hidden: reduced ? { y: "0%", opacity: 1 } : { y: "110%", opacity: 0 },
-  visible: {
-    y: "0%",
-    opacity: 1,
-    transition: reduced ? { duration: 0 } : { duration: 0.9, ease: EASE },
-  },
-});
-
-/** A hairline connector drawing itself out from its origin. */
-export const drawLine = (reduced: boolean): Variants => ({
-  hidden: reduced ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 },
-  visible: {
-    scaleX: 1,
-    opacity: 1,
-    transition: reduced ? { duration: 0 } : { duration: 0.6, ease: EASE },
-  },
-});
