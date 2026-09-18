@@ -54,6 +54,12 @@ domain everywhere at once.
 | `/ai-infrastructure/mcp-integrations` | `135:1743` | done — built from the PDF export |
 | `/ai-infrastructure/multi-agent-workflows` | `135:1951` | done — built from the PDF export |
 | `/ai-infrastructure/monitoring-cost-optimization` | `135:724` | done — built from the PDF export |
+| `/industries` | — | done — built from the PDF export |
+| `/industries/independent-hotels` | `135:1349` | done — template + data |
+| `/industries/hostel-groups` | — | done — template + data |
+| `/industries/short-term-rentals` | — | done — template + data |
+| `/industries/serviced-apartments` | — | done — template + data |
+| `/industries/boutique-hotels` | — | done — template + data |
 | Everything else in the nav | various | not started |
 
 Shared building blocks live in `src/components/ui/`: `CtaBand` (mid-page quote
@@ -143,6 +149,35 @@ its deeper pages keep their own `/ai-infrastructure/*` paths — those are
 separate Figma frames (`135:1743` MCP Integrations, `135:724` Monitoring) and
 aren't built yet. If you'd rather the whole group moved under Solutions, it's a
 single edit in `src/lib/site.ts`.
+
+---
+
+## The industry page template
+
+All eleven industry pages share one eleven-section shape, so the layout lives
+in `src/components/industry/IndustryTemplate.tsx` and each industry supplies
+only content — see `src/lib/industries/independent-hotels.ts` and the
+`IndustryPageData` type beside it. Adding the next industry means writing one
+data file and a four-line route, not another component.
+
+Blocks the hospitality pages repeat verbatim — the recommended system, module
+list, integrations, agent log, case studies and three of the four questions —
+live in `src/lib/industries/shared.ts`, so each page file is under 100 lines
+of genuinely industry-specific copy.
+
+Each needs one asset: a hero photograph at
+`public/images/industries/<slug>.jpg`. Without it the hero falls back to its
+scrim and still reads as designed, so a missing photo degrades rather than
+breaks.
+
+---
+
+## Single sources of truth
+
+`src/lib/site.ts` holds `industryGroups`. The Industries dropdown, the
+`/industries` page, the `ItemList` structured data and the sitemap all derive
+from it, so an industry cannot appear in one and be missing from another. The
+sitemap likewise derives from `primaryNav`.
 
 ---
 

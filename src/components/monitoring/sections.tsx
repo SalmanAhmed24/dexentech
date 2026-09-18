@@ -10,6 +10,7 @@ import {
   IconScissors,
 } from "@/components/icons/mcp-icons";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { StatusDot } from "@/components/ui/StatusDot";
 import type { Pillar } from "@/components/ui/PillarCards";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
@@ -31,25 +32,23 @@ const ROUTES = [
 
 export function MonitorConsole() {
   return (
-    <BrowserFrame url="monitor.dexentech.com" className="bg-cinder">
-      <div className="flex justify-end px-[21px] pt-4">
-        <span className="flex items-center gap-1.5">
-          <span
-            aria-hidden="true"
-            className="size-1.5 rounded-full bg-violet-core shadow-[0_0_8px_2px_rgb(168_85_247/0.5)]"
-          />
-          <span className="font-mono text-[10.5px] uppercase tracking-[1px] text-violet-soft">
-            Live
-          </span>
-        </span>
-      </div>
-
+    <BrowserFrame
+      url="monitor.dexentech.com"
+      className="bg-slate-850"
+      chromeRight={<StatusDot label="Live" />}
+    >
       {/*
         Figures, so a description list: the label is the term and the number is
-        its value. Screen readers announce the pairing instead of four loose
-        strings.
+        its value, announced as a pair rather than as loose strings.
+
+        The export washes a 6%-opacity violet band across the full card width
+        behind this row — it is not a fill on the third tile alone.
       */}
-      <dl className="grid grid-cols-3 gap-2 px-[21px] pt-3">
+      <dl className="relative grid grid-cols-3 gap-2 px-[21px] py-3">
+        <span
+          aria-hidden="true"
+          className="absolute inset-x-0 inset-y-0 -z-10 bg-[linear-gradient(180deg,rgb(168_85_247/0),rgb(168_85_247/0.06),rgb(168_85_247/0))]"
+        />
         {STATS.map((stat) => (
           <div
             key={stat.label}

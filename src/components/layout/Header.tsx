@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Logo } from "@/components/icons/Logo";
 import { Button } from "@/components/ui/Button";
 import { EASE, gsap, ScrollTrigger, usePrefersReducedMotion } from "@/lib/motion";
-import { primaryCta, primaryNav, site } from "@/lib/site";
+import { primaryCta, primaryNav, site, type NavItem } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -73,8 +73,17 @@ export function Header() {
     };
   }, [drawerOpen]);
 
-  const isActive = (href: string) =>
+  const matches = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  /*
+    A group counts as active when the current route is one of its children,
+    not only when it matches the group's own href. Without this, the AI
+    Infrastructure group never highlights on its own sub-pages, since its href
+    points at the overview under /solutions.
+  */
+  const isActive = (item: NavItem) =>
+    matches(item.href) || (item.children?.some((c) => matches(c.href)) ?? false);
 
   return (
     <header
@@ -105,7 +114,7 @@ export function Header() {
         >
           {primaryNav.map((item) => {
             const hasChildren = Boolean(item.children?.length);
-            const active = isActive(item.href);
+            const active = isActive(item);
 
             if (!hasChildren) {
               return (
@@ -133,28 +142,44 @@ export function Header() {
                 onMouseEnter={() => setOpenMenu(item.label)}
                 onMouseLeave={() => setOpenMenu(null)}
               >
-                <button
-                  type="button"
-                  aria-expanded={open}
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={() => setOpenMenu(open ? null : item.label)}
+                {/*
+                  The label navigates and the chevron discloses — two controls,
+                  because one element cannot both follow a link and toggle a
+                  menu without stealing one behaviour from keyboard users.
+                  Hovering anywhere on the pair still opens the menu.
+                */}
+                <div
                   className={cn(
                     "flex items-center gap-[3px] text-[13.5px] font-medium leading-[20.25px]",
                     "transition-colors duration-200",
-                    active || open
-                      ? "text-ink-100"
-                      : "text-ink-500 hover:text-ink-100",
+                    active || open ? "text-ink-100" : "text-ink-500",
                   )}
                 >
-                  {item.label}
-                  <ChevronDown
-                    className={cn(
-                      "size-[13px] opacity-50 transition-transform duration-300",
-                      open && "rotate-180",
-                    )}
-                  />
-                </button>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className="transition-colors duration-200 hover:text-ink-100"
+                  >
+                    {item.label}
+                  </Link>
+
+                  <button
+                    type="button"
+                    aria-expanded={open}
+                    aria-controls={menuId}
+                    aria-haspopup="true"
+                    aria-label={`${item.label} submenu`}
+                    onClick={() => setOpenMenu(open ? null : item.label)}
+                    className="-m-1 flex items-center p-1 transition-colors duration-200 hover:text-ink-100"
+                  >
+                    <ChevronDown
+                      className={cn(
+                        "size-[13px] opacity-50 transition-transform duration-300",
+                        open && "rotate-180",
+                      )}
+                    />
+                  </button>
+                </div>
 
                 <AnimatePresence>
                   {open && (
@@ -166,28 +191,31 @@ export function Header() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={reduced ? { opacity: 0 } : { opacity: 0, y: 4, scale: 0.98 }}
                       transition={{ duration: reduced ? 0 : 0.22, ease: EASE }}
-                      className={cn(
-                        "absolute left-1/2 top-[calc(100%+14px)] w-[300px] -translate-x-1/2",
-                        "rounded-[14px] border border-line bg-cinder/95 p-2",
-                        "shadow-[0_24px_60px_-20px_rgb(0_0_0/0.8)] backdrop-blur-xl",
-                      )}
+                      className="absolute left-1/2 top-full w-[300px] -translate-x-1/2 pt-[14px]"
                     >
-                      {item.children!.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="block rounded-[10px] px-3 py-2.5 transition-colors duration-200 hover:bg-[rgb(255_255_255/0.05)]"
-                        >
-                          <span className="block text-[13.5px] font-medium text-ink-100">
-                            {child.label}
-                          </span>
-                          {child.description && (
-                            <span className="mt-0.5 block text-[12.5px] leading-snug text-ink-500">
-                              {child.description}
+                      <div
+                        className={cn(
+                          "rounded-[14px] border border-line bg-cinder/95 p-2",
+                          "shadow-[0_24px_60px_-20px_rgb(0_0_0/0.8)] backdrop-blur-xl",
+                        )}
+                      >
+                        {item.children!.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="block rounded-[10px] px-3 py-2.5 transition-colors duration-200 hover:bg-[rgb(255_255_255/0.05)]"
+                          >
+                            <span className="block text-[13.5px] font-medium text-ink-100">
+                              {child.label}
                             </span>
-                          )}
-                        </Link>
-                      ))}
+                            {child.description && (
+                              <span className="mt-0.5 block text-[12.5px] leading-snug text-ink-500">
+                                {child.description}
+                              </span>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -250,7 +278,7 @@ export function Header() {
                       href={item.href}
                       className={cn(
                         "block rounded-[9px] px-3 py-3 text-[15px] font-medium transition-colors",
-                        isActive(item.href)
+                        isActive(item)
                           ? "bg-[rgb(255_255_255/0.05)] text-ink-100"
                           : "text-ink-300 hover:text-ink-100",
                       )}

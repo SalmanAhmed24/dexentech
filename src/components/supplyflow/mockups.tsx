@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { StatusDot } from "@/components/ui/StatusDot";
 import { cn } from "@/lib/utils";
 
 /**
@@ -17,7 +18,7 @@ function PanelHeading({
   right,
 }: {
   left: string;
-  /* Rendered raw, so callers can pass <LiveDot /> as well as plain text. */
+  /* Rendered raw, so callers can pass an element as well as plain text. */
   right?: ReactNode;
 }) {
   return (
@@ -30,19 +31,6 @@ function PanelHeading({
   );
 }
 
-function LiveDot({ label }: { label: string }) {
-  return (
-    <span className="flex items-center gap-1.5">
-      <span
-        aria-hidden="true"
-        className="size-1.5 rounded-full bg-violet-core shadow-[0_0_8px_2px_rgb(168_85_247/0.5)]"
-      />
-      <span className="font-mono text-[10.5px] uppercase tracking-[1px] text-violet-soft">
-        {label}
-      </span>
-    </span>
-  );
-}
 
 function Tag({ children, tone = "muted" }: { children: string; tone?: "muted" | "violet" }) {
   return (
@@ -70,8 +58,12 @@ const INCOMING = [
 
 export function OrderFeedMock() {
   return (
-    <BrowserFrame url="portal.dexentech.com/orders" className="bg-cinder">
-      <PanelHeading left="Incoming orders · overnight" right={<LiveDot label="Live" />} />
+    <BrowserFrame
+      url="portal.dexentech.com/orders"
+      className="bg-cinder"
+      chromeRight={<StatusDot label="Live" />}
+    >
+      <PanelHeading left="Incoming orders · overnight" />
 
       <ul className="px-[21px]">
         {INCOMING.map((order) => (
@@ -259,11 +251,11 @@ const SUPPLY_AGENTS = [
 
 export function SupplyAgentsMock() {
   return (
-    <BrowserFrame url="app.dexentech.com/supply/agents" className="bg-cinder">
-      <div className="flex justify-end px-[21px] pt-4">
-        <LiveDot label="Live" />
-      </div>
-
+    <BrowserFrame
+      url="app.dexentech.com/supply/agents"
+      className="bg-cinder"
+      chromeRight={<StatusDot label="Live" />}
+    >
       <ul className="px-[21px] pb-[21px] pt-3 font-mono text-[11.5px] leading-[23px]">
         {SUPPLY_AGENTS.map((line) => (
           <li key={line.agent}>

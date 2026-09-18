@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { AiHero } from "@/components/ai-intelligence/AiHero";
 import {
   AI_FAQ,
-  AiFaq,
   ServiceCards,
   WhatTeamsBuild,
 } from "@/components/ai-intelligence/sections";
+import { FaqGrid } from "@/components/ui/FaqGrid";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { PillGroup } from "@/components/ui/PillGroup";
 import { JsonLd } from "@/components/JsonLd";
@@ -95,7 +95,7 @@ export default function AiIntelligenceSystemsPage() {
         cta={{ label: "Get a Quote", href: "/pricing" }}
       />
 
-      <AiFaq />
+      <FaqGrid id="ai-faq" items={AI_FAQ} />
 
       <JsonLd
         data={graph(

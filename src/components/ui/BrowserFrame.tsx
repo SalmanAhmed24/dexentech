@@ -12,11 +12,17 @@ export function BrowserFrame({
   children,
   className,
   bodyClassName,
+  chromeRight,
 }: {
   url: string;
   children: ReactNode;
   className?: string;
   bodyClassName?: string;
+  /**
+   * Status shown at the right edge of the chrome bar — "LIVE", "SYNCED".
+   * The designs place it on the same row as the URL, not below it.
+   */
+  chromeRight?: ReactNode;
 }) {
   return (
     <div
@@ -33,6 +39,7 @@ export function BrowserFrame({
           <span className="size-[9px] rounded-[4.5px] bg-line-strong" />
         </span>
         <span className="pl-2.5 font-mono text-[10.5px] text-ink-600">{url}</span>
+        {chromeRight && <span className="ml-auto">{chromeRight}</span>}
       </div>
 
       <div className={cn("relative", bodyClassName)}>{children}</div>

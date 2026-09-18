@@ -1,4 +1,4 @@
-import { site } from "./site";
+import { industryGroups, site } from "./site";
 
 /**
  * Structured data serves two audiences now.
@@ -193,6 +193,33 @@ export function faqSchema(
       "@type": "Question",
       name: item.question,
       acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+}
+
+/**
+ * The industries served, as an ItemList.
+ *
+ * Built from the same `industryGroups` the page renders, so the two cannot
+ * disagree. Useful to answer engines fielding "who makes software for hostel
+ * groups" — it gives them an explicit, ordered list rather than prose to infer
+ * from.
+ */
+export function industriesItemList() {
+  const items = industryGroups.flatMap((group) =>
+    group.items.map((item) => ({ ...item, group: group.name })),
+  );
+
+  return {
+    "@type": "ItemList",
+    "@id": abs("/industries#list"),
+    name: "Industries served by DexenTech",
+    numberOfItems: items.length,
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.label,
+      url: abs(item.href),
     })),
   };
 }

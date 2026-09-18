@@ -18,6 +18,58 @@ export const site = {
   founded: "2024",
 } as const;
 
+/**
+ * The two industry families, in the order the Industries page lists them.
+ *
+ * Single source of truth: the nav dropdown, the /industries page and the
+ * sitemap all derive from this, so an industry cannot appear in one place and
+ * be missing from another.
+ */
+export const industryGroups = [
+  {
+    name: "Hospitality",
+    items: [
+      { label: "Independent Hotels", href: "/industries/independent-hotels" },
+      { label: "Hostel Groups", href: "/industries/hostel-groups" },
+      {
+        label: "Short-Term Rental Management",
+        href: "/industries/short-term-rentals",
+      },
+      { label: "Serviced Apartments", href: "/industries/serviced-apartments" },
+      { label: "Boutique Hotels", href: "/industries/boutique-hotels" },
+    ],
+  },
+  {
+    name: "B2B Commerce",
+    items: [
+      {
+        label: "Industrial Parts Distributors",
+        href: "/industries/industrial-parts-distributors",
+      },
+      {
+        label: "Food & Beverage Wholesale",
+        href: "/industries/food-beverage-wholesale",
+      },
+      {
+        label: "Construction Materials Suppliers",
+        href: "/industries/construction-materials-suppliers",
+      },
+      {
+        label: "Medical & Laboratory Suppliers",
+        href: "/industries/medical-laboratory-suppliers",
+      },
+      {
+        label: "Manufacturing Components Distributors",
+        href: "/industries/manufacturing-components-distributors",
+      },
+      {
+        label: "Chemical & Industrial Wholesalers",
+        href: "/industries/chemical-industrial-wholesalers",
+      },
+    ],
+  },
+] as const;
+
 export type NavItem = {
   label: string;
   href: string;
@@ -50,25 +102,10 @@ export const primaryNav: NavItem[] = [
   {
     label: "Industries",
     href: "/industries",
-    children: [
-      { label: "Independent Hotels", href: "/industries/independent-hotels" },
-      { label: "Hostel Groups", href: "/industries/hostel-groups" },
-      { label: "Short-Term Rentals", href: "/industries/short-term-rentals" },
-      { label: "Serviced Apartments", href: "/industries/serviced-apartments" },
-      { label: "Boutique Hotels", href: "/industries/boutique-hotels" },
-      {
-        label: "Industrial Parts Distributors",
-        href: "/industries/industrial-parts-distributors",
-      },
-      {
-        label: "Food & Beverage Wholesale",
-        href: "/industries/food-beverage-wholesale",
-      },
-      {
-        label: "Construction Materials",
-        href: "/industries/construction-materials-suppliers",
-      },
-    ],
+    // Derived, so the dropdown can never fall behind the Industries page.
+    children: industryGroups.flatMap((group) =>
+      group.items.map((item) => ({ label: item.label, href: item.href })),
+    ),
   },
   {
     label: "AI Infrastructure",

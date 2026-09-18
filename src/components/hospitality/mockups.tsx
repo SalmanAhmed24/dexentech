@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { StatusDot } from "@/components/ui/StatusDot";
 import { cn } from "@/lib/utils";
 
 /**
@@ -30,19 +31,6 @@ function PanelHeading({ left, right }: { left: string; right?: string }) {
   );
 }
 
-function LiveDot({ label, className }: { label: string; className?: string }) {
-  return (
-    <span className={cn("flex items-center gap-1.5", className)}>
-      <span
-        aria-hidden="true"
-        className="size-1.5 rounded-full bg-violet-core shadow-[0_0_8px_2px_rgb(168_85_247/0.5)]"
-      />
-      <span className="font-mono text-[10.5px] uppercase tracking-[1px] text-violet-soft">
-        {label}
-      </span>
-    </span>
-  );
-}
 
 /* ---------- Hero: unified calendar ---------- */
 
@@ -62,6 +50,7 @@ export function CalendarMock() {
       <BrowserFrame
         url="app.dexentech.com/hospitality/calendar"
         className="bg-cinder"
+        chromeRight={<StatusDot label="Synced" />}
       >
         <PanelHeading left="Unified calendar · 3 properties" right="Jul 14 — 27" />
 
@@ -255,11 +244,11 @@ const THREAD = [
 
 export function WhatsAppMock() {
   return (
-    <BrowserFrame url="whatsapp · guest concierge" className="bg-cinder">
-      <div className="flex items-center justify-end px-[21px] pt-4">
-        <LiveDot label="Auto" />
-      </div>
-
+    <BrowserFrame
+      url="whatsapp · guest concierge"
+      className="bg-cinder"
+      chromeRight={<StatusDot label="Auto" />}
+    >
       <ul className="flex flex-col gap-3 px-[21px] pb-[18px] pt-3">
         {THREAD.map((message, i) => (
           <li
@@ -308,11 +297,11 @@ const AGENT_LINES = [
 
 export function AgentsMock() {
   return (
-    <BrowserFrame url="app.dexentech.com/hospitality/agents" className="bg-cinder">
-      <div className="flex items-center justify-end px-[21px] pt-4">
-        <LiveDot label="Live" />
-      </div>
-
+    <BrowserFrame
+      url="app.dexentech.com/hospitality/agents"
+      className="bg-cinder"
+      chromeRight={<StatusDot label="Live" />}
+    >
       <ul className="px-[21px] pb-[21px] pt-3 font-mono text-[11.5px] leading-[23px]">
         {AGENT_LINES.map((line) => (
           <li key={line.agent}>

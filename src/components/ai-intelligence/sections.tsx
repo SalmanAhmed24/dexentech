@@ -208,31 +208,3 @@ export const AI_FAQ = [
   },
 ] as const;
 
-export function AiFaq() {
-  return (
-    <section aria-labelledby="ai-faq" className="shell py-16 md:py-24">
-      <Reveal>
-        <SectionHeading id="ai-faq">Fair questions</SectionHeading>
-      </Reveal>
-
-      {/*
-        Open cards rather than the <details> accordion used on the solution
-        pages — this design shows every answer at once.
-      */}
-      <ul className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {AI_FAQ.map((item, i) => (
-          <Reveal as="li" key={item.question} delay={(i % 3) * 0.06} className="h-full">
-            <article className="h-full rounded-[14px] border border-[rgb(255_255_255/0.08)] bg-slate-900 p-[27px]">
-              <h3 className="text-[15.5px] font-semibold leading-snug text-pretty text-ink-100">
-                {item.question}
-              </h3>
-              <p className="mt-3.5 text-[14px] leading-[23px] text-pretty text-ink-400">
-                {item.answer}
-              </p>
-            </article>
-          </Reveal>
-        ))}
-      </ul>
-    </section>
-  );
-}
