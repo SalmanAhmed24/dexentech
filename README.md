@@ -225,6 +225,17 @@ copy already on the site, but the two headlines are new.
 
 ---
 
+## Icons
+
+Generated from the logo's own path and gradient (the D mark in
+`components/icons/Logo.tsx`), not redrawn: `icon.svg` for modern browsers,
+a `favicon.ico` whose 16/32/48 frames are each rendered at size,
+`apple-touch-icon.png` (opaque — iOS blackens transparency), transparent
+`logo-192/512.png` for the manifest and Organization schema, and a maskable
+512 with the mark inside Android's 80% safe zone.
+
+---
+
 ## Holding pages
 
 `/case-studies` and `/contact` render `ComingSoon` at their real URLs, so every

@@ -14,12 +14,7 @@ Nothing to download automatically — the Figma MCP asset URLs expire after
 
 All page artwork is committed. OPTIONAL BRANDING (referenced by src/app/layout.tsx):
 
-  public/images/logo-192.png      app icon, 192x192
-  public/images/logo-512.png      app icon, 512x512
   public/opengraph-image.png      1200x630 social card
-  public/favicon.ico
-  public/icon.svg
-  public/apple-touch-icon.png     180x180
   public/fonts/MonumentExtended-Regular.woff2   (licensed — wordmark only)
 
 Missing files degrade gracefully; they will not break the build.
