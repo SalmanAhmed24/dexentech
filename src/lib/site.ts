@@ -59,10 +59,6 @@ export const industryGroups = [
         href: "/industries/medical-laboratory-suppliers",
       },
       {
-        label: "Manufacturing Components Distributors",
-        href: "/industries/manufacturing-components-distributors",
-      },
-      {
         label: "Chemical & Industrial Wholesalers",
         href: "/industries/chemical-industrial-wholesalers",
       },

@@ -82,3 +82,86 @@ export const HOSPITALITY_COMMON_FAQ = [
       "Most operators replace 3–4 subscriptions (channel manager, PMS, messaging, pricing tool) with one. The quote shows the line-by-line comparison.",
   },
 ] as const;
+
+/* ======================================================================= */
+/* B2B commerce pages                                                      */
+/* ======================================================================= */
+
+/*
+  Product-level blocks for the six B2B commerce industries, which recommend
+  SupplyFlowOS. These describe the product rather than the industry, so they
+  are safe to share from the first page.
+
+  The three common questions below were confirmed shared once Food & Beverage
+  Wholesale matched Industrial Parts word for word — the same evidence bar the
+  hospitality set was held to.
+*/
+
+export const SUPPLYFLOW_RECOMMENDED: IndustryPageData["recommended"] = {
+  product: "SupplyFlowOS",
+  body: "A B2B ordering portal wired to your CRM, inventory, and pricing tiers. Customers see their prices and live stock; orders flow in without a phone ringing.",
+  href: "/solutions/supplyflow-os",
+  ctaLabel: "Explore SupplyFlowOS",
+};
+
+export const SUPPLYFLOW_MODULES = [
+  "B2B Commerce Portal",
+  "CRM & Sales Intelligence",
+  "Inventory & Supply Chain",
+  "HRM & Workforce",
+  "AI Intelligence Layer",
+  "MCP Integrations",
+] as const;
+
+export const SUPPLYFLOW_PLUGS = [
+  "SAP",
+  "ERPNext",
+  "Odoo",
+  "Sage",
+  "Xero",
+  "LinkedIn Sales Navigator",
+  "WhatsApp Business",
+  "Slack",
+] as const;
+
+export const SUPPLYFLOW_AGENT_LOG = [
+  { agent: "forecast/demand", result: "SKU-level demand modeled" },
+  { agent: "agent/procurement", result: "POs proposed · awaiting approval" },
+  { agent: "agent/invoices", result: "supplier invoices extracted" },
+  { agent: "agent/churn", result: "at-risk accounts flagged" },
+] as const;
+
+export const SUPPLYFLOW_CASE_STUDIES = [
+  {
+    title: "B2B Ordering Portal",
+    blurb: "Customers ordering themselves instead of by phone. Read the case study.",
+    href: "/case-studies",
+  },
+  {
+    title: "Distribution Inventory System",
+    blurb: "One stock ledger across warehouses. Read the case study.",
+    href: "/case-studies",
+  },
+] as const;
+
+/**
+ * The three closing questions every B2B page repeats. Each page leads with
+ * its own industry-specific question, then spreads these.
+ */
+export const SUPPLYFLOW_COMMON_FAQ = [
+  {
+    question: "We run SAP / Sage. Replace or connect?",
+    answer:
+      "Either. Most distributors keep the ERP for finance and run ordering, CRM, and stock on SupplyFlowOS, synced both ways.",
+  },
+  {
+    question: "Will older customers actually use a portal?",
+    answer:
+      "Phone and email keep working — those orders get entered once, into the same system. The portal wins customers over because their prices and stock are finally accurate.",
+  },
+  {
+    question: "How fast can we be live?",
+    answer:
+      "Catalog and pricing tiers first, portal in 4–8 weeks. Orders never stop during rollout.",
+  },
+] as const;

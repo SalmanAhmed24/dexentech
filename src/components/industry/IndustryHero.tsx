@@ -45,14 +45,18 @@ export function IndustryHero({
       className="relative isolate overflow-hidden"
     >
       {/*
-        Photograph at 20% — the opacity Figma bakes into the export's alpha
-        channel. Kept in CSS instead so the committed file stays a normal
-        opaque image: it compresses far better, and the dimming can be tuned
-        without re-exporting.
+        Photograph at the opacity Figma bakes into the export's alpha channel —
+        20% on most pages, but not all (Medical & Laboratory runs at 36%). Kept
+        in CSS so the committed file stays a normal opaque image: it compresses
+        far better, and the dimming can be tuned without re-exporting.
       */}
       <div aria-hidden="true" className="absolute inset-0 -z-20">
         {hero.image && (
-          <div data-ih="photo" className="absolute inset-0 opacity-20">
+          <div
+            data-ih="photo"
+            className="absolute inset-0"
+            style={{ opacity: hero.image.opacity ?? 0.2 }}
+          >
             <Image
               src={hero.image.src}
               alt=""

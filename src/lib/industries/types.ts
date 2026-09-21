@@ -18,7 +18,16 @@ export type IndustryPageData = {
      * Full-bleed photograph behind the hero. Optional: without it the section
      * falls back to the violet bloom and still reads as designed.
      */
-    image?: { src: string; alt: string };
+    image?: {
+      src: string;
+      alt: string;
+      /**
+       * How strongly the photo shows through, 0–1. Figma bakes this into the
+       * export's alpha channel; read it from there (alpha / 255) when adding a
+       * page. Defaults to 0.2, which most industry heroes use.
+       */
+      opacity?: number;
+    };
     secondaryCta?: { label: string; href: string };
   };
 

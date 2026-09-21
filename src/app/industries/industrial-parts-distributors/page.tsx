@@ -1,6 +1,6 @@
 import { IndustryJsonLd } from "@/components/industry/IndustryJsonLd";
 import { IndustryTemplate } from "@/components/industry/IndustryTemplate";
-import { hostelGroups as data } from "@/lib/industries/hostel-groups";
+import { industrialPartsDistributors as data } from "@/lib/industries/industrial-parts-distributors";
 import { industryMetadata } from "@/lib/industries/page";
 
 export const metadata = industryMetadata(data);

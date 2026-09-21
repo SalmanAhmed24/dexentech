@@ -60,6 +60,11 @@ domain everywhere at once.
 | `/industries/short-term-rentals` | — | done — template + data |
 | `/industries/serviced-apartments` | — | done — template + data |
 | `/industries/boutique-hotels` | — | done — template + data |
+| `/industries/industrial-parts-distributors` | — | done — template + data (first B2B) |
+| `/industries/food-beverage-wholesale` | — | done — template + data |
+| `/industries/construction-materials-suppliers` | — | done — template + data |
+| `/industries/medical-laboratory-suppliers` | — | done — template + data (hero at 36%) |
+| `/industries/chemical-industrial-wholesalers` | — | done — template + data |
 | Everything else in the nav | various | not started |
 
 Shared building blocks live in `src/components/ui/`: `CtaBand` (mid-page quote
@@ -154,7 +159,7 @@ single edit in `src/lib/site.ts`.
 
 ## The industry page template
 
-All eleven industry pages share one eleven-section shape, so the layout lives
+All ten industry pages share one eleven-section shape, so the layout lives
 in `src/components/industry/IndustryTemplate.tsx` and each industry supplies
 only content — see `src/lib/industries/independent-hotels.ts` and the
 `IndustryPageData` type beside it. Adding the next industry means writing one
@@ -164,6 +169,11 @@ Blocks the hospitality pages repeat verbatim — the recommended system, module
 list, integrations, agent log, case studies and three of the four questions —
 live in `src/lib/industries/shared.ts`, so each page file is under 100 lines
 of genuinely industry-specific copy.
+
+Routes are three lines: `industryMetadata(data)` in `lib/industries/page.ts`
+builds the `<head>`, and `IndustryJsonLd` picks the product schema from
+`data.recommended.href`, so a B2B page can never declare HospitalityOS.
+`shared.ts` holds a `HOSPITALITY_*` block and a `SUPPLYFLOW_*` block.
 
 Each needs one asset: a hero photograph at
 `public/images/industries/<slug>.jpg`. Without it the hero falls back to its
