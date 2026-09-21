@@ -119,11 +119,18 @@ export const primaryNav: NavItem[] = [
     ],
   },
   { label: "Services", href: "/services" },
+  { label: "Technology Stack", href: "/technology-stack" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
+
+/**
+ * Routes currently served by the coming-soon holding page. They are noindexed,
+ * so the sitemap leaves them out — listing a noindexed URL there sends search
+ * engines contradictory signals. Remove an entry when its real page ships.
+ */
+export const comingSoonPaths = new Set(["/case-studies", "/contact"]);
 
 export const primaryCta = {
   label: "Book a Systems Call",

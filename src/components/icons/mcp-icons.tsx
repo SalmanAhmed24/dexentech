@@ -144,3 +144,16 @@ export function IconBell({ className }: { className?: string }) {
     </Box>
   );
 }
+
+/** Customer support (services, pillar 02) */
+export function IconHeadset({ className }: { className?: string }) {
+  return (
+    <Box className={className}>
+      <path d="M3.2 11.2V9.5a6.3 6.3 0 0 1 12.6 0v1.7" {...stroke} />
+      <path
+        d="M15.8 11.2v2.3a1.2 1.2 0 0 1-1.2 1.2h-.8a.8.8 0 0 1-.8-.8v-3a.8.8 0 0 1 .8-.8h2Zm-12.6 0v2.3a1.2 1.2 0 0 0 1.2 1.2h.8a.8.8 0 0 0 .8-.8v-3a.8.8 0 0 0-.8-.8h-2Z"
+        {...stroke}
+      />
+    </Box>
+  );
+}

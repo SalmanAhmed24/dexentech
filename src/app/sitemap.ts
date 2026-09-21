@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { primaryNav, site } from "@/lib/site";
+import { comingSoonPaths, primaryNav, site } from "@/lib/site";
 
 /**
  * Generated from the same nav config that renders the header, so a new page
@@ -15,10 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const now = new Date();
 
-  return [...routes].map((route) => ({
-    url: new URL(route, site.url).toString(),
-    lastModified: now,
-    changeFrequency: route === "/" ? "weekly" : "monthly",
-    priority: route === "/" ? 1 : 0.7,
-  }));
+  return [...routes]
+    .filter((route) => !comingSoonPaths.has(route))
+    .map((route) => ({
+      url: new URL(route, site.url).toString(),
+      lastModified: now,
+      changeFrequency: route === "/" ? "weekly" : "monthly",
+      priority: route === "/" ? 1 : 0.7,
+    }));
 }

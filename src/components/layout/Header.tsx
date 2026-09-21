@@ -107,10 +107,14 @@ export function Header() {
           </span>
         </Link>
 
-        {/* Desktop navigation */}
+        {/*
+          Desktop navigation. The gap tightens to 20px between xl and 2xl:
+          with "Technology Stack" in the list, 26px gaps overflow the header
+          by ~12px at a 1280px viewport. The design's 26px returns at 1536px.
+        */}
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-[26px] xl:flex"
+          className="hidden items-center gap-5 xl:flex 2xl:gap-[26px]"
         >
           {primaryNav.map((item) => {
             const hasChildren = Boolean(item.children?.length);

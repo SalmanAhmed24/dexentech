@@ -28,7 +28,7 @@ const COLUMNS = [
   {
     heading: "Services",
     links: [
-      { label: "AI Workflow Automation", href: "/services#workflow-automation" },
+      { label: "AI Workflow Automation", href: "/services" },
       { label: "Data Entry", href: "/services#data-entry" },
       { label: "Document Parsing", href: "/services#document-parsing" },
       { label: "Reporting", href: "/services#reporting" },
@@ -39,7 +39,7 @@ const COLUMNS = [
     links: [
       { label: "Pricing", href: "/pricing" },
       { label: "Case Studies", href: "/case-studies" },
-      { label: "Blog", href: "/blog" },
+      { label: "Technology Stack", href: "/technology-stack" },
       { label: "Contact", href: "/contact" },
     ],
   },

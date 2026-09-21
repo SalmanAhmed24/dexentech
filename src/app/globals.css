@@ -71,6 +71,8 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    /* Clears the fixed 72px header when jumping to #anchors */
+    scroll-padding-top: 96px;
   }
 
   body {
@@ -140,6 +142,32 @@
     height: auto;
     overflow: visible;
     clip-path: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Coming-soon orbit
+   --------------------------------------------------------------------------- */
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes soft-ping {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
   }
 }
 

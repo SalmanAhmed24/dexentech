@@ -65,6 +65,11 @@ domain everywhere at once.
 | `/industries/construction-materials-suppliers` | — | done — template + data |
 | `/industries/medical-laboratory-suppliers` | — | done — template + data (hero at 36%) |
 | `/industries/chemical-industrial-wholesalers` | — | done — template + data |
+| `/services` | `53:9997` | done — interactive stack diagram; two tab panels drafted |
+| `/technology-stack` | — | done — 12 technologies; Blog removed from nav |
+| `/pricing` | — | done — six offerings, no published figures |
+| `/case-studies` | — | **holding page** (ComingSoon, noindex) |
+| `/contact` | — | **holding page** (ComingSoon, noindex) — highest priority to replace |
 | Everything else in the nav | various | not started |
 
 Shared building blocks live in `src/components/ui/`: `CtaBand` (mid-page quote
@@ -203,6 +208,30 @@ components:
   TypeScript refuses readonly-to-mutable tuple assignment.
 - **`React.` namespace without importing React.** React 19's types dropped the
   global UMD namespace, so `React.ReactNode` fails in a module.
+
+---
+
+## Services page notes
+
+**The stack diagram is live markup, not the SVG.** The export draws every
+label as outlined paths, so it couldn't respond to the pointer or be read by a
+screen reader. `StackDiagram.tsx` rebuilds it using the export's exact spoke
+endpoints and gradient colours (in `lib/services.ts`). Card positions were
+checked for collisions from 944 to 1180px wide; below `lg` it becomes a grid.
+
+**Two tab panels are drafts.** The design only defines Hospitality. B2B
+Commerce and Recruiting are marked `draft: true`: every agent line traces to
+copy already on the site, but the two headlines are new.
+
+---
+
+## Holding pages
+
+`/case-studies` and `/contact` render `ComingSoon` at their real URLs, so every
+link on the site already points at its permanent address. Both are
+`noindex, follow` and excluded from the sitemap via `comingSoonPaths` in
+`site.ts`. To ship the real page: replace the route file and delete the path
+from `comingSoonPaths`. Nothing else changes.
 
 ---
 
